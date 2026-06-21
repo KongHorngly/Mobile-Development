@@ -1,27 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(
-    const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SelectableButton(),
-              SizedBox(height: 10),
-              SelectableButton(),
-              SizedBox(height: 10),
-              SelectableButton(),
-              SizedBox(height: 10),
-              SelectableButton(),
-            ],
-          ),
-        ),
-      ),
-    ),
-  );
-}
 
 class SelectableButton extends StatefulWidget {
   const SelectableButton({super.key});
@@ -59,4 +37,23 @@ class _SelectableButtonState extends State<SelectableButton> {
       ),
     );
   }
+}
+void main() {
+  runApp(
+    const MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SelectableButton(),
+              SizedBox(height: 10),
+              SelectableButton(),
+              SizedBox(height: 10),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
 }
