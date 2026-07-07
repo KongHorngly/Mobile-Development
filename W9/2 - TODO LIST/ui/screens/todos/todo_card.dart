@@ -1,0 +1,78 @@
+import 'package:flutter/material.dart';
+
+import '../../../models/todo.dart';
+import '../../theme/app_screen.dart';
+
+class TodoCard extends StatelessWidget {
+  const TodoCard({super.key, required this.todo, required this.onTap});
+
+  final Todo todo;
+  final ValueChanged<Todo> onTap;
+ 
+
+  // Completed todos get struck through; not-completed ones stay plain.
+  TextDecoration? get textDecoration =>
+      todo.completed ? TextDecoration.lineThrough : TextDecoration.none;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GestureDetector(
+        onTap: () => onTap(todo),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            border: BoxBorder.all(width: 2, color: AppTheme.yellowColor),
+          ),
+
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Row(
+              children: [
+                CheckBox(checked: todo.completed),
+                SizedBox(width: 10),
+                Text(
+                  todo.title,
+                  style: AppTheme.paragraph.copyWith(
+                    decoration: textDecoration,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CheckBox extends StatelessWidget {
+  const CheckBox({super.key, required this.checked});
+
+  final bool checked;
+
+
+  // Checked -> filled green box with a check icon.
+  // Unchecked -> empty box with just an outline.
+  BoxBorder? get border =>
+      checked ? null : BoxBorder.all(width: 2, color: AppTheme.yellowColor);
+  Color? get backbroundColor => checked ? AppTheme.greenColor : null;
+  Widget? get innerIcon =>
+      checked ? Icon(Icons.check, color: Colors.white) : null;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 30,
+      height: 30,
+      decoration: BoxDecoration(
+        border: border,
+        color: backbroundColor,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: innerIcon,
+    );
+  }
+}
